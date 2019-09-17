@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,64 +21,59 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.CRUD.estudo.event.RecursoCriadoEvent;
-import com.CRUD.estudo.model.Categoria;
-import com.CRUD.estudo.repository.CategoriaRepository;
-import com.CRUD.estudo.service.CategoriaService;
+import com.CRUD.estudo.model.Pessoa;
+import com.CRUD.estudo.repository.PessoaRepository;
+import com.CRUD.estudo.service.PessoaService;
 
 @RestController
-@RequestMapping(path="/categorias",produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoriaResource {
+@RequestMapping(path="/pessoas")
+public class PessoaResource {
+
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	private CategoriaService categoriaService;
+	private PessoaService pessoaService;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping("/{codigo}")
-	public Optional<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
+	public Optional<Pessoa> buscarPeloCodigo(@PathVariable Long codigo){
 		
-		return categoriaRepository.findById(codigo);
+		return pessoaRepository.findById(codigo);
 	}
-
+	
 	@GetMapping
-	public List<Categoria> listar() {
+	public List<Pessoa> listar(){
 		
-		return categoriaRepository.findAll();
+		return pessoaRepository.findAll();
+		
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> Criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
-		Categoria categoriaSalva = categoriaRepository.save(categoria);
+	public ResponseEntity<Pessoa> Criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
+		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 	
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getCodigo()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo){
 		
-		categoriaRepository.deleteById(codigo);
+		pessoaRepository.deleteById(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long codigo, @Valid @RequestBody Categoria categoria){
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
 		
-		Categoria categoriaSalva = categoriaService.atualizar(codigo, categoria);
-		
-		return ResponseEntity.ok(categoriaSalva);
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		return ResponseEntity.ok(pessoaSalva);
 	
 	}
 	
 
-	
-
-	
-
-	
-	
 	
 }

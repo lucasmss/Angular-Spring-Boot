@@ -10,3 +10,9 @@ CREATE TABLE pessoa(
     uf VARCHAR(2),
     ativo boolean
 );
+
+insert into pessoa (nome, logradouro, numero, complemento, bairro, cep, cidade, uf, ativo) 
+values ('Lucas Mateus', 'quadra 2', 'numero 18', 'apt 203', 'setor central', '705610', 'Gama', 'DF', true);
+
+insert into pessoa (nome, logradouro, numero, complemento, bairro, cep, cidade, uf, ativo) 
+values ('Selminha', 'quadra 9', 'numero 50', 'apt 502', 'Sul', '506369', 'Samanbaia', 'DF', true);
