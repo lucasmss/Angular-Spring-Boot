@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.CRUD.estudo.event.RecursoCriadoEvent;
 import com.CRUD.estudo.model.Pessoa;
 import com.CRUD.estudo.repository.PessoaRepository;
-import com.CRUD.estudo.service.PessoaService;
 
 @RestController
 @RequestMapping(path="/pessoas")
@@ -33,15 +33,17 @@ public class PessoaResource {
 	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	private PessoaService pessoaService;
-	
-	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	
 	@GetMapping("/{codigo}")
-	public Optional<Pessoa> buscarPeloCodigo(@PathVariable Long codigo){
+	public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo){
+		Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
 		
-		return pessoaRepository.findById(codigo);
+		if (pessoa != null)
+			return ResponseEntity.ok(pessoa);
+		else
+			return ResponseEntity.notFound().build();
 	}
 	
 	@GetMapping
@@ -67,9 +69,12 @@ public class PessoaResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+	public ResponseEntity<Optional<Pessoa>> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
 		
-		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		Optional<Pessoa> pessoaSalva = pessoaRepository.findById(codigo);
+		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
+		pessoaRepository.save(pessoaSalva);
+		
 		return ResponseEntity.ok(pessoaSalva);
 	
 	}

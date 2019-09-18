@@ -18,7 +18,7 @@ public class CategoriaService {
 	
 	
 	public Categoria atualizar(Long codigo, Categoria categoria) {
-		Optional<Categoria> categoriaSalva = categoriaRepository.findById(codigo);
+	Optional<Categoria> categoriaSalva = categoriaRepository.findById(codigo);
 		if(categoriaSalva == null) {
 			
 			throw new EmptyResultDataAccessException(1);

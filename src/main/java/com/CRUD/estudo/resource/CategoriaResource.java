@@ -31,12 +31,13 @@ import com.CRUD.estudo.service.CategoriaService;
 public class CategoriaResource {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+
+	@Autowired
+	private ApplicationEventPublisher publisher;
 	
 	@Autowired
 	private CategoriaService categoriaService;
-	
-	@Autowired
-	private ApplicationEventPublisher publisher;
+
 	
 	@GetMapping("/{codigo}")
 	public Optional<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
