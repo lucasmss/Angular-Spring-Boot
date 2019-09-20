@@ -1,6 +1,6 @@
 package com.CRUD.estudo.service;
 
-import java.util.Optional; 
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,10 @@ public class PessoaService {
 			
 			throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
+		BeanUtils.copyProperties(pessoa, pessoaSalva);
 		return pessoaRepository.save(pessoaSalva);
 		
 	}
+	
 
 }

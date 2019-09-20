@@ -38,17 +38,17 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	
-	@GetMapping("/{codigo}")
-	public Optional<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
-		
-		return categoriaRepository.findById(codigo);
-	}
 
 	@GetMapping
 	public List<Categoria> listar() {
 		
 		return categoriaRepository.findAll();
+	}
+	
+	@GetMapping("/{codigo}")
+	public Optional<Categoria> buscarPeloCodigo(@PathVariable Long codigo){
+		
+		return categoriaRepository.findById(codigo);
 	}
 	
 	@PostMapping

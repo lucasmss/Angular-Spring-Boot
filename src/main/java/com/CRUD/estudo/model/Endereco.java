@@ -2,6 +2,7 @@ package com.CRUD.estudo.model;
 
 import javax.persistence.Embeddable;
 
+
 @Embeddable
 public class Endereco {
 	
