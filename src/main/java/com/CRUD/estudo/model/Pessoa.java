@@ -53,8 +53,8 @@ public class Pessoa {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public boolean setAtivo(boolean ativo) {
+		return this.ativo = ativo;
 	}
 
 	@Override

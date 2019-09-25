@@ -68,10 +68,11 @@ public class CategoriaResource {
 	
 	@PutMapping("/{codigo}")
 	public ResponseEntity<Categoria> atualizar(@PathVariable Long codigo, @Valid @RequestBody Categoria categoria){
+		buscarPeloCodigo(codigo);
 		
 		Categoria categoriaSalva = categoriaService.atualizar(codigo, categoria);
 		
-		return ResponseEntity.ok(categoriaSalva);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(categoriaSalva);
 	
 	}
 	

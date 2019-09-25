@@ -1,8 +1,5 @@
 package com.CRUD.estudo.service;
 
-import java.util.Optional;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,16 +14,23 @@ public class PessoaService {
 	private PessoaRepository pessoaRepository;
 	
 	
-	public Pessoa atualizar(Long codigo, Pessoa pessoa) {
-		Optional<Pessoa> pessoaSalva = pessoaRepository.findById(codigo);
-		if(pessoaSalva == null) {
+	public Pessoa atualizar (Long codigo, Pessoa pessoa){
+
+		Long pessoaCod = pessoa.getCodigo();
+		String nomePessoa = pessoa.getNome();
+		
+		
+		if(pessoaCod == codigo && nomePessoa != null) {
 			
-			throw new EmptyResultDataAccessException(1);
+		return pessoaRepository.save(pessoa);
+		
+		}else {
+			
+			 throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(pessoa, pessoaSalva);
-		return pessoaRepository.save(pessoaSalva);
 		
 	}
-	
+
+
 
 }

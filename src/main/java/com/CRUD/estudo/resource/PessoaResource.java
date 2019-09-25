@@ -31,12 +31,13 @@ public class PessoaResource {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
-	@Autowired
-	private PessoaService pessoaService;
+
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
+	
+	@Autowired
+	private PessoaService pessoaService;
 	
 	
 	@GetMapping
@@ -48,8 +49,9 @@ public class PessoaResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo){
+	
 		Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
-		
+			
 		if (pessoa != null)
 			return ResponseEntity.ok(pessoa);
 		else
@@ -72,13 +74,14 @@ public class PessoaResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
+		
+		buscarPeloCodigo(codigo);
 		
 		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
 		
-		return ResponseEntity.ok(pessoaSalva);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(pessoaSalva);
+		
 	}
-
-
-	
+		
 }

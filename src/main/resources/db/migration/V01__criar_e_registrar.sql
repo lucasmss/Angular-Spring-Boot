@@ -6,5 +6,5 @@ create table categoria(
 insert into categoria (nome) value("Lazer"); 
 insert into categoria (nome) value("Alimentação"); 
 insert into categoria (nome) value("Supermecado"); 
-insert into categoria (nome) value("Farmacia"); 
-insert into categoria (nome) value("Outros");  
+insert into categoria (nome) value("Farmácia"); 
+insert into categoria (nome) value("Estudos Finaceiro");  

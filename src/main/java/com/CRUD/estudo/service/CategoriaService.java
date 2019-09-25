@@ -1,8 +1,5 @@
 package com.CRUD.estudo.service;
 
-import java.util.Optional;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,14 +14,20 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;
 	
 	
-	public Categoria atualizar(Long codigo, Categoria categoria) {
-	Optional<Categoria> categoriaSalva = categoriaRepository.findById(codigo);
-		if(categoriaSalva == null) {
+	public Categoria atualizar (Long codigo, Categoria categoria){
+
+		Long categoriaCod = categoria.getCodigo();
+		String nomeCategoria = categoria.getNome();
+		
+		
+		if(categoriaCod == codigo && nomeCategoria != null) {
 			
-			throw new EmptyResultDataAccessException(1);
+		return categoriaRepository.save(categoria);
+		
+		}else {
+			
+			 throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(codigo, categoriaSalva, "codigo");
-		return categoriaRepository.save(categoriaSalva);
 		
 	}
 
