@@ -19,7 +19,6 @@ public class PessoaService {
 		Long pessoaCod = pessoa.getCodigo();
 		String nomePessoa = pessoa.getNome();
 		
-		
 		if(pessoaCod == codigo && nomePessoa != null) {
 			
 		return pessoaRepository.save(pessoa);
