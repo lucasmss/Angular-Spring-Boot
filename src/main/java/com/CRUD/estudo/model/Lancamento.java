@@ -28,6 +28,9 @@ public class Lancamento {
 	
 	@NotNull
 	@Column(name = "data_vencimento")
+	private LocalDate dataVencimento;
+	
+	@Column(name = "data_pagamento")
 	private LocalDate dataPagamento;
 	
 	@NotNull
@@ -62,6 +65,14 @@ public class Lancamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public LocalDate getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(LocalDate dataVencimento) {
+		this.dataVencimento = dataVencimento;
 	}
 
 	public LocalDate getDataPagamento() {
@@ -136,7 +147,6 @@ public class Lancamento {
 			return false;
 		return true;
 	}
-	
-	
+
 	
 }
