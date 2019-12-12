@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
@@ -25,7 +26,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/categorias").permitAll()
+			.antMatchers("/categorias", "/lancamentos").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.httpBasic().and()

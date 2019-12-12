@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import com.CRUD.estudo.model.Lancamento;
@@ -13,6 +14,7 @@ import com.CRUD.estudo.repository.LancamentoRepository;
 import com.CRUD.estudo.repository.PessoaRepository;
 
 @Service
+@EnableScheduling
 public class LancamentoService {
 
 	@Autowired
