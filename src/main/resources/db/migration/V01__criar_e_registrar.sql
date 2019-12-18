@@ -7,4 +7,6 @@ insert into categoria (nome) value("Lazer");
 insert into categoria (nome) value("Alimentação"); 
 insert into categoria (nome) value("Supermecado"); 
 insert into categoria (nome) value("Farmácia"); 
+insert into categoria (nome) value("Salario"); 
 insert into categoria (nome) value("Estudos Finaceiro");  
+insert into categoria (nome) value("Investimento Financeiro"); 

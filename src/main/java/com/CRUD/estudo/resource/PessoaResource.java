@@ -1,6 +1,5 @@
 package com.CRUD.estudo.resource;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +7,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,7 @@ import com.CRUD.estudo.event.RecursoCriadoEvent;
 import com.CRUD.estudo.model.Pessoa;
 import com.CRUD.estudo.repository.PessoaRepository;
 import com.CRUD.estudo.service.PessoaService;
-
+@CrossOrigin
 @RestController
 @RequestMapping(path="/pessoas")
 public class PessoaResource {
@@ -41,9 +43,9 @@ public class PessoaResource {
 	
 	
 	@GetMapping
-	public List<Pessoa> listar(){
+	public Page<Pessoa> listar(Pageable pageable){
 		
-		return pessoaRepository.findAll();
+		return pessoaRepository.findAll(pageable);
 		
 	}
 	
