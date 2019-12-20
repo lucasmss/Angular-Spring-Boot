@@ -37,15 +37,14 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 			.csrf().disable(); 
 	}
 	
+	 public void addCorsMappings(CorsRegistry registry) {
+	        registry.addMapping("/**")
+	                       .allowedOrigins("http://localhost:4200/")
+	                       .allowedMethods("GET", "POST", "PUT", "DELETE")
+	                       .allowedHeaders("Content-Type", "Authorization");
+	    }
 	
 		
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                       .allowedOrigins("*")
-                       .allowedMethods("GET", "POST", "PUT", "DELETE")
-                       .allowedHeaders("Content-Type", "Authorization");
-    }
-
 	
 	}
 
